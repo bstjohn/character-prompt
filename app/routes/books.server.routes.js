@@ -6,7 +6,7 @@ module.exports = function(app) {
 
     app.route('/books')
         .get(books.list)
-        .post(users.requiresLogin, categories.create);
+        .post(users.requiresLogin, books.create);
 
     app.route('/books/:bookId')
         .get(books.read)

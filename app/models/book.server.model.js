@@ -54,7 +54,7 @@ var BookSchema = new Schema({
         trim: true,
         unique: false,
         required: 'description cannot be blank',
-        validate: [validateDescriptionLength('description must be 140 characters or less')]
+        validate: [validateDescriptionLength, 'description must be 140 characters or less']
     },
     releaseDate: {
         type: Date,

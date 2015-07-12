@@ -5,7 +5,7 @@
  */
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
-    Category = mongoose.model('Category'),
+    Book = mongoose.model('Book'),
     _ = require('lodash');
 
 /**
@@ -20,16 +20,16 @@ exports.create = function(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.status(201).json(category);
+            res.status(201).json(book);
         }
-    })
+    });
 };
 
 /**
  * Show the current Book
  */
 exports.read = function(req, res) {
-    res.json(req.category);
+    res.json(req.book);
 };
 
 /**
@@ -46,7 +46,7 @@ exports.update = function(req, res) {
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.json(category);
+            res.json(book);
         }
     });
 };
@@ -88,21 +88,23 @@ exports.list = function(req, res) {
  */
 exports.bookById = function(req, res, next, id) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return next(err);
+        return res.status(400).send({
+            message: 'Book is invalid'
+        });
     }
 
-    Book.findById(id).exec(function(err, category) {
+    Book.findById(id).exec(function(err, book) {
         if (err) {
             return next(err);
         }
 
-        if (!category) {
+        if (!book) {
             return res.status(404).send({
-                message: "Book not found"
+                message: 'Book not found'
             });
         }
 
-        req.category = category;
+        req.book = book;
         next();
     });
 };

@@ -100,7 +100,7 @@ exports.categoryById = function(req, res, next, id) {
 
         if (!category) {
             return res.status(404).send({
-               message: "Category not found"
+               message: 'Category not found'
             });
         }
 
