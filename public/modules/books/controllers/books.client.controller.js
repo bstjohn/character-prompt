@@ -29,6 +29,7 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 				// Clear form fields
 				$scope.title = '';
                 $scope.author = '';
+                $scope.description = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

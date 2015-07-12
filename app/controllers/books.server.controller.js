@@ -14,7 +14,7 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
     var book = new Book(req.body);
 
-    book.save(function (err) {
+    book.save(function(err) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -36,7 +36,7 @@ exports.read = function(req, res) {
  * Update a Book
  */
 exports.update = function(req, res) {
-    var book = new Book(req.body);
+    var book = req.book;
 
     book = _.extend(book, req.body);
 
@@ -72,10 +72,10 @@ exports.delete = function(req, res) {
  * List of Books
  */
 exports.list = function(req, res) {
-    Book.find().excec(function(err, books) {
+    Book.find().exec(function(err, books) {
         if (err) {
             return res.status(400).send({
-                message: errorHandler.getErrorMessage()
+                message: errorHandler.getErrorMessage(err)
             });
         } else {
             res.json(books);
