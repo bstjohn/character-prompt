@@ -1,9 +1,9 @@
 <section data-ng-controller="BooksController" data-ng-init="findOne()">
     <div class="page-header">
-        <h1 data-ng-bind="book.title"></h1>
-        <h4 data-ng-bind="book.author"></h4>
+        <h1 data-ng-bind="book.title | capitalize:true"></h1>
+        <h4 data-ng-bind="book.author | capitalize:true"></h4>
         <p data-ng-bind="book.releaseDate"></p>
-        <p data-ng-bind="book.description"></p>
+        <p data-ng-bind="book.description | capitalize"></p>
     </div>
     <div class="pull-right">
         <a class="btn btn-primary" href="/#!/books/{{book._id}}/edit">
