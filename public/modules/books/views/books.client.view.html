@@ -1,3 +1,14 @@
-<section data-ng-controller="BooksController">
-	This is the Books view
+<section data-ng-controller="BooksController" data-ng-init="find()">
+	<div class="page-header">
+		<h1>Books</h1>
+	</div>
+	<div class="list-group">
+		<a data-ng-repeat="book in books" data-ng-href="#!/books/{{book._id}}" class="list-group-item">
+			<h4 class="list-group-item-heading" data-ng-bind="book.name"></h4>
+			<span data-ng-bind="book.description"></span>
+		</a>
+	</div>
+	<div class="alert alert-warning text-center" data-ng-hide="!books.$resolved || books.length">
+		No books yet, why don't you <a href="/#!/books/create">create one</a>?
+	</div>
 </section>
