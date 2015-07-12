@@ -17,7 +17,8 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		$scope.create = function() {
 			// Create new Book object
 			var book = new Books ({
-				name: this.name,
+				title: this.title,
+                author: this.author,
 				description: this.description
 			});
 
@@ -26,7 +27,8 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 				$location.path('books/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.title = '';
+                $scope.author = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
