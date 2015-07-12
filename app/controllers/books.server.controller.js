@@ -72,5 +72,37 @@ exports.delete = function(req, res) {
  * List of Books
  */
 exports.list = function(req, res) {
+    Book.find().excec(function(err, books) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage()
+            });
+        } else {
+            res.json(books);
+        }
+    });
+};
 
+/**
+ * Book middleware
+ */
+exports.bookById = function(req, res, next, id) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return next(err);
+    }
+
+    Book.findById(id).exec(function(err, category) {
+        if (err) {
+            return next(err);
+        }
+
+        if (!category) {
+            return res.status(404).send({
+                message: "Book not found"
+            });
+        }
+
+        req.category = category;
+        next();
+    });
 };
