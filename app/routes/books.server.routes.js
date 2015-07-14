@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-	var books = require('../../app/controllers/books.server.controller.js');
+    var books = require('../../app/controllers/books.server.controller.js');
     var users = require('../../app/controllers/users.server.controller');
 
     app.route('/books')
