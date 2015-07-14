@@ -41,7 +41,11 @@ var CharacterSchema = new Schema({
 		trim: true,
 		unique: false,
 		required: 'first name cannot be blank',
-		validate: [validateLength, 'first name must be 30 characters or less']
+		/**
+		* TODO: Test this.
+		*/
+		maxLength: maxLength
+		// validate: [validateLength, 'first name must be 30 characters or less']
 	},
 	middleName: {
 		type: String,
