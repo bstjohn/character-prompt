@@ -35,6 +35,7 @@ var BookSchema = new Schema({
     title: {
         type: String,
         default: '',
+        lowercase: true,
         trim: true,
         unique: true,
         required: 'title cannot be blank',
@@ -43,6 +44,7 @@ var BookSchema = new Schema({
     author: {
         type: String,
         default: '',
+        lowercase: true,
         trim: true,
         unique: false,
         required: 'author cannot be blank',
@@ -51,6 +53,7 @@ var BookSchema = new Schema({
     description: {
         type: String,
         default: '',
+        lowercase: true,
         trim: true,
         unique: false,
         required: 'description cannot be blank',

@@ -24,6 +24,8 @@ function validateDescriptionLength (v) {
 	return v.length <= 140;
 }
 
+var maxLength = [30, '`{PATH}` must be `{VALUE}` or less'];
+
 /**
  * Character Schema
  */
@@ -35,6 +37,7 @@ var CharacterSchema = new Schema({
 	firstName: {
 		type: String,
 		default: '',
+        lowercase: true,
 		trim: true,
 		unique: false,
 		required: 'first name cannot be blank',
@@ -43,6 +46,7 @@ var CharacterSchema = new Schema({
 	middleName: {
 		type: String,
 		default: '',
+        lowercase: true,
 		trim: true,
 		unique: false,
 		validate: [validateLength, 'middle name must be 30 characters or less']
@@ -50,6 +54,7 @@ var CharacterSchema = new Schema({
 	lastName: {
 		type: String,
 		default: '',
+        lowercase: true,
 		trim: true,
 		unique: false,
 		validate: [validateLength, 'last name must be 30 characters or less']
@@ -57,6 +62,7 @@ var CharacterSchema = new Schema({
 	description: {
 		type: String,
 		default: '',
+        lowercase: true,
 		trim: true,
 		unique: false,
 		required: 'description cannot be blank',
@@ -65,6 +71,7 @@ var CharacterSchema = new Schema({
 	descriptionLong: {
 		type: String,
 		default: '',
+        lowercase: true,
 		trim: true,
 		unique: false,
 		required: 'description cannot be blank'
