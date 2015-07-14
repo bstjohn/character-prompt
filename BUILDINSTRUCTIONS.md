@@ -6,6 +6,10 @@ license terms.
 
 ##### 1. Download and install necessary components of [MeanJS](http://meanjs.org/docs.html).
 
+Installation files and instructions for MongoDB can be found on the [MongoDB home page](mongodb.org).
+
+
+
 ##### 2. Start MongoDB.
 
 ```sh
