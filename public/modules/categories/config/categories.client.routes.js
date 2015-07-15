@@ -21,7 +21,7 @@ angular.module('categories').config(['$stateProvider',
 			}).
 			state('editCategory', {
 				url: '/categories/:categoryId/edit',
-				templateUrl: 'modules/categories/views/edit-category.client.view.html'
+				templateUrl: 'modules/categories/views/edit-character.client.view.html'
 			});
 	}
 ]);

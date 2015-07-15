@@ -9,9 +9,9 @@ module.exports = function(app) {
         .post(users.requiresLogin, characters.create);
 
     app.route('/characters/:characterId')
-        .get(characters.read)
-        .put(users.requiresLogin, characters.update)
-        .delete(users.requiresLogin, characters.delete);
+        .get(characters.read);
+        //.put(users.requiresLogin, characters.update);
+        //.delete(users.requiresLogin, characters.delete);
 
     app.param('characterId', characters.characterById);
 };

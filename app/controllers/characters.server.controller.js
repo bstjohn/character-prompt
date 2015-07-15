@@ -26,6 +26,14 @@ exports.create = function(req, res) {
 };
 
 /**
+ * Look at a Character
+ */
+exports.read = function(req, res) {
+    res.json(req.character);
+};
+
+
+/**
  * Update a Character
  */
 exports.update = function(req, res) {
