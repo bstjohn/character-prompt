@@ -32,6 +32,11 @@ var CharacterSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+    book: {
+        type: Schema.Types.ObjectId,
+        ref: 'Book',
+        required: 'The specified book does not exist'
+    },
 	firstName: {
 		type: String,
 		default: '',
@@ -57,6 +62,13 @@ var CharacterSchema = new Schema({
 		unique: false,
 		validate: [validateLength, 'last name must be 30 characters or less']
 	},
+    fullName: {
+        type: String,
+        default: '',
+        lowercase: true,
+        //trim: true,
+        unique: false
+    },
 	description: {
 		type: String,
 		default: '',

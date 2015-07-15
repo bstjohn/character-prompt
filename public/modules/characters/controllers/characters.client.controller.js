@@ -1,5 +1,26 @@
 'use strict';
 
+/**
+ * Returns the full name as a single string.
+ * @param first The first name.
+ * @param middle    The middle name.
+ * @param last  The last name.
+ * @returns {*}
+ */
+var getFullName = function(first, middle, last) {
+    var fullName = first;
+
+    if (middle !== '' || middle !== null) {
+        fullName = fullName.concat(' ', middle);
+    }
+
+    if (last !== '' || last !== null) {
+        fullName = fullName.concat(' ', last);
+    }
+
+    return fullName;
+};
+
 angular.module('characters').controller('CharactersController', ['$scope',
 	function($scope, $stateParams, $location, Authentication, Characters) {
 		$scope.authentication = Authentication;
@@ -15,10 +36,12 @@ angular.module('characters').controller('CharactersController', ['$scope',
 		// Create new Character
 		$scope.create = function() {
 			var character = new Characters ({
+                book: this.book,
                 title: this.title,
                 firstName: this.firstName,
                 middleName: this.middleName,
                 lastName: this.lastName,
+                fullName: getFullName(this.firstName, this.middleName, this.lastName),
                 description: this.description,
                 bio: this.bio
             });
@@ -27,6 +50,7 @@ angular.module('characters').controller('CharactersController', ['$scope',
                $location.path('characters/ + response.id');
 
                 // Clear form fields
+                //$scope.book = '';
                 $scope.title = '';
                 $scope.firstName = '';
                 $scope.middleName = '';

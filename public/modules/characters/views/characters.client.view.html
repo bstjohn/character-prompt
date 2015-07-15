@@ -1,3 +1,22 @@
-<section data-ng-controller="CharactersController">
-	This is the Characters view
+<section data-ng-controller="CharactersController" data-ng-init="find()">
+	<div class="page-header" style="display: inline-block">
+		<h1 class="pull-left">Characters</h1>
+		<a data-ng-href="#!/characters/create" class="btn btn-info pull-right">
+			<span class="glyphicon glyphicon-plus"></span> New
+		</a>
+	</div>
+	<!-- this is the new search input field -->
+	<div class="form-group">
+		<input type="text" ng-model="search" typeahead="character as character.fullName for character in characters | filter:$viewValue | limitTo:8" class="form-control" typeahead-on-select="characterSearch($item)" placeholder="Search Character...">
+	</div>
+	<div class="list-group">
+		<a data-ng-repeat="character in characters" data-ng-href="#!/characters/{{character._id}}" class="list-group-item">
+			<h4 class="list-group-item-heading" data-ng-bind="character.fullName| capitalize:true"></h4>
+			<!--<h6 data-ng-bind="character.author | capitalize:true"></h6>-->
+			<!--<span data-ng-bind="character.description | capitalize"></span>-->
+		</a>
+	</div>
+	<div class="alert alert-warning text-center" data-ng-hide="!characters.$resolved || characters.length">
+		No characters yet, why don't you <a href="/#!/characters/create">create one</a>?
+	</div>
 </section>
