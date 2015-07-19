@@ -25,9 +25,10 @@ var getFullName = function(first, middle, last) {
     return angular.lowercase(fullName);
 };
 
-angular.module('characters').controller('CharactersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Characters',
-	function($scope, $stateParams, $location, Authentication, Characters) {
+angular.module('characters').controller('CharactersController', ['$scope', '$stateParams', '$location', '$filter', 'Authentication', 'Characters', 'Books',
+	function($scope, $stateParams, $location, $filter, Authentication, Characters, Books) {
 		$scope.authentication = Authentication;
+        $scope.books = Books.query();
 		$scope.currentPage = 1;
 		$scope.pageSize = 10;
 		$scope.offset = 0;
@@ -88,6 +89,7 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 		// Update existing Character
 		$scope.update = function() {
 			var character = $scope.character;
+            character.book = character.book._id;
 
 			character.$update(function() {
 				$location.path('characters/' + character._id);
@@ -96,16 +98,24 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 			});
 		};
 
+        var appendBook = function appendBook(character) {
+            character.book = $filter('filter')($scope.books, {_id: character.book})[0];
+        };
+
 		// Find a list of Characters
 		$scope.find = function() {
-			$scope.characters = Characters.query();
+			//$scope.characters = Characters.query();
+            Characters.query(function loadedCharacters(characters) {
+                characters.forEach(appendBook);
+                $scope.characters = characters;
+            });
 		};
 
 		// Find existing Character
 		$scope.findOne = function() {
 			$scope.character = Characters.get({
 				characterId: $stateParams.characterId
-			});
+			}, appendBook);
 		};
 
 		// Search for a character

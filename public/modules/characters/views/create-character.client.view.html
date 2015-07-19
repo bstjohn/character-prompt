@@ -8,8 +8,7 @@
                 <div class="form-group">
                     <label class="control-label" for="book">Book</label>
                     <div class="controls">
-                        <!--<input type="text" ng-model="search" id="book" typeahead="book as book.title for book in books | filter:$viewValue | limitTo:8" class="form-control" typeahead-on-select="bookSearch($item)" placeholder="Search Book...">-->
-                        <input type="text" id="book" class="form-control" placeholder="Search Book...">
+                        <select data-ng-model="book" class="form-control" id="book" ng-options="book._id as book.title for book in books" data-placement="Book" required></select>
                     </div>
                 </div>
                 <div class="form-group form-inline">

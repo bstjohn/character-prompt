@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<section data-ng-controller="CharactersController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1 data-ng-bind="character.fullName | capitalize:true"></h1>
+        <span class="h4">Book:</span>
+        <a class="h4" href="#!/books/{{character.book._id}}">
+            {{character.book.title | capitalize:true}}
+        </a>
+        <p data-ng-bind="character.description | capitalize"></p>
+        <p data-ng-bind="character.bio | capitalize"></p>
+    </div>
+    <div class="pull-right">
+        <a class="btn btn-primary" href="/#!/characters/{{character._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn btn-primary" data-ng-click="remove();">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+</section>
