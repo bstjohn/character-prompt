@@ -60,6 +60,7 @@ var CharacterSchema = new Schema({
         lowercase: true,
 		trim: true,
 		unique: false,
+		required: 'Last name cannot be blank',
 		validate: [validateLength, 'last name must be 30 characters or less']
 	},
     fullName: {

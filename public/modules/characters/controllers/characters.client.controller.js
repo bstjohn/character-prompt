@@ -8,20 +8,24 @@
  * @returns {*}
  */
 var getFullName = function(first, middle, last) {
+    if (first === '' || angular.isUndefined(first)) {
+        return '';
+    }
+
     var fullName = first;
 
-    if (middle !== '' || middle !== null) {
+    if (angular.isDefined(middle)) {
         fullName = fullName.concat(' ', middle);
     }
 
-    if (last !== '' || last !== null) {
+    if (angular.isDefined(last)) {
         fullName = fullName.concat(' ', last);
     }
 
-    return fullName;
+    return angular.lowercase(fullName);
 };
 
-angular.module('characters').controller('CharactersController', ['$scope',
+angular.module('characters').controller('CharactersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Characters',
 	function($scope, $stateParams, $location, Authentication, Characters) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = 1;
@@ -46,11 +50,13 @@ angular.module('characters').controller('CharactersController', ['$scope',
                 bio: this.bio
             });
 
+            console.log(character.fullName);
+
             character.$save(function(response) {
                $location.path('characters/ + response.id');
 
                 // Clear form fields
-                //$scope.book = '';
+                $scope.book = '';
                 $scope.title = '';
                 $scope.firstName = '';
                 $scope.middleName = '';
