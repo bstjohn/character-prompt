@@ -1,16 +1,25 @@
 <section data-ng-controller="BooksController" data-ng-init="findOne()">
     <div class="page-header">
-        <h1 data-ng-bind="book.title | capitalize:true"></h1>
-        <h4 data-ng-bind="book.author | capitalize:true"></h4>
-        <p data-ng-bind="book.releaseDate"></p>
-        <p data-ng-bind="book.description | capitalize"></p>
+        <div class="">
+            <h1 data-ng-bind="book.title | capitalize:true"></h1>
+            <h4 data-ng-bind="book.author | capitalize:true"></h4>
+            <p data-ng-bind="book.releaseDate"></p>
+            <p data-ng-bind="book.description | capitalize"></p>
+
+            <div class="">
+                <a class="btn btn-primary" href="/#!/books/{{book._id}}/edit">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+                <a class="btn btn-primary" data-ng-click="remove();">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="pull-right">
-        <a class="btn btn-primary" href="/#!/books/{{book._id}}/edit">
-            <i class="glyphicon glyphicon-edit"></i>
-        </a>
-        <a class="btn btn-primary" data-ng-click="remove();">
-            <i class="glyphicon glyphicon-trash"></i>
+    <h2>Characters</h2>
+    <div class="list-group">
+        <a data-ng-repeat="character in bookCharacters" data-ng-href="#!/characters/{{character._id}}" class="list-group-item">
+            <h4 class="list-group-item-heading" data-ng-bind="character.fullName| capitalize:true"></h4>
         </a>
     </div>
 </section>

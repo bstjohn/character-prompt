@@ -1,9 +1,10 @@
 'use strict';
 
 // Books controller
-angular.module('books').controller('BooksController', ['$scope', '$stateParams', '$location', 'Authentication', 'Books',
-	function($scope, $stateParams, $location, Authentication, Books) {
+angular.module('books').controller('BooksController', ['$scope', '$stateParams', '$location', 'Authentication', 'Books', 'Characters',
+	function($scope, $stateParams, $location, Authentication, Books, Characters) {
 		$scope.authentication = Authentication;
+		$scope.bookCharacters = Characters.query();
 		$scope.currentPage = 1;
 		$scope.pageSize = 10;
 		$scope.offset = 0;
@@ -76,8 +77,8 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		};
 
 		// Search for a book
-		$scope.bookSearch = function(product) {
-			$location.path('books/' + product._id);
+		$scope.bookSearch = function(book) {
+			$location.path('books/' + book._id);
 		};
 	}
 ]);

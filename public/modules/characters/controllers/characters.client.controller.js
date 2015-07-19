@@ -119,8 +119,8 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 		};
 
 		// Search for a character
-		$scope.characterSearch = function(product) {
-			$location.path('characters/' + product._id);
+		$scope.characterSearch = function(character) {
+			$location.path('characters/' + character._id);
 		};
 	}
 ]);
