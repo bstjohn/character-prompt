@@ -20,5 +20,7 @@ $ mongod
 ```sh
 $ git clone [git-repo-url] character-prompt
 $ cd character-prompt
+$ npm install
+$ bower install
 $ npm start
 ```
