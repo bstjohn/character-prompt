@@ -4,10 +4,25 @@
 angular.module('books').controller('BooksController', ['$scope', '$stateParams', '$location', 'Authentication', 'Books', 'Characters',
 	function($scope, $stateParams, $location, Authentication, Books, Characters) {
 		$scope.authentication = Authentication;
-		$scope.bookCharacters = Characters.query();
 		$scope.currentPage = 1;
 		$scope.pageSize = 10;
 		$scope.offset = 0;
+
+        $scope.characterCollection = Characters.query();
+        $scope.characterCollection.$promise.then(function () {
+            var characters = [];
+            for (var i = 0; i < $scope.characterCollection.length; i++) {
+                var currentCharacter =  $scope.characterCollection[i];
+                characters.push({
+                    firstName: currentCharacter.firstName,
+                    middleName: currentCharacter.middleName,
+                    lastName: currentCharacter.lastName,
+                    description: currentCharacter.description,
+                    id: currentCharacter.id
+                });
+            }
+            $scope.bookCharacters = characters;
+        });
 
 		// Page changed handler
 		$scope.pageChanged = function() {

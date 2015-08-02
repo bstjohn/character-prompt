@@ -1,3 +1,8 @@
+<style>
+    .st-sort-default:before {content: '\25B1'}
+    .st-sort-ascent:before {content: '\25B2'}
+    .st-sort-descent:before {content: '\25BC'}
+</style>
 <section data-ng-controller="BooksController" data-ng-init="findOne()">
     <div class="page-header">
         <div class="">
@@ -17,9 +22,30 @@
         </div>
     </div>
     <h2>Characters</h2>
-    <div class="list-group">
-        <a data-ng-repeat="character in bookCharacters" data-ng-href="#!/characters/{{character._id}}" class="list-group-item">
-            <h4 class="list-group-item-heading" data-ng-bind="character.fullName| capitalize:true"></h4>
-        </a>
-    </div>
+    <table st-table="bookCharacters" st-safe-src="characterCollection" class="table table-striped">
+        <thead>
+        <tr>
+            <th colspan="5"><input st-search="" class="form-control" placeholder="Search.." type="search"/></th>
+        </tr>
+        <tr>
+            <th st-sort="firstName" st-sort-default="true">First Name</th>
+            <th st-sort="middleName">Middle Name</th>
+            <th st-sort="lastName">Last Name</th>
+            <th st-sort="description">Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="character in bookCharacters">
+            <td>{{character.firstName | capitalize:true}}</td>
+            <td>{{character.middleName | capitalize:true}}</td>
+            <td>{{character.lastName | capitalize:true}}</td>
+            <td>{{character.description | capitalize}}</td>
+            <td>
+                <a class="btn" href="/#!/characters/{{character._id}}">
+                    <i class="glyphicon glyphicon-eye-open"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </section>

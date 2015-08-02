@@ -1,6 +1,5 @@
 'use strict';
 
-
 /**
  * Characters service used to communicate Characters REST endpoints
  */
