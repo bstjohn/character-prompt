@@ -89,7 +89,6 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 		// Update existing Character
 		$scope.update = function() {
 			var character = $scope.character;
-            //character.book = character.book._id;
 
 			character.$update(function() {
 				$location.path('characters/' + character._id);

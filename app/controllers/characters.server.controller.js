@@ -106,6 +106,7 @@ exports.characterById = function(req, res, next, id) {
         }
 
         req.character = character;
+        req.book = character.book;
         next();
     });
 };

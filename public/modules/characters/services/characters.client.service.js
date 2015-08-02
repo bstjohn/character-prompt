@@ -9,6 +9,13 @@ angular.module('characters').factory('Characters', ['$resource',
         }, {
             update: {
                 method: 'PUT'
+            },
+            querySome: {
+                method:'GET',
+                params: {
+                    book: 'bookId'
+                },
+                isArray:true
             }
         });
     }
