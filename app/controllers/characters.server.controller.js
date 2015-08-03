@@ -104,7 +104,6 @@ exports.characterById = function(req, res, next, id) {
                 message: 'Character not found'
             });
         }
-
         req.character = character;
         req.book = character.book;
         next();

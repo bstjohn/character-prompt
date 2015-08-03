@@ -1,14 +1,12 @@
 'use strict';
 
-//Setting up route
+/**
+ * Characters route.
+ */
 angular.module('characters').config(['$stateProvider',
 	function($stateProvider) {
 		// Characters state routing
 		$stateProvider.
-		state('create-character', {
-			url: '/characterscreate',
-			templateUrl: 'modules/characters/views/create-character.client.view.html'
-		}).
 			state('listCharacters', {
 				url: '/characters',
 				templateUrl: 'modules/characters/views/characters.client.view.html'

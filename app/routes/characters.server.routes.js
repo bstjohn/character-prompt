@@ -2,7 +2,6 @@
 
 module.exports = function(app) {
     var characters = require('../../app/controllers/characters.server.controller.js');
-    var books = require('../../app/controllers/books.server.controller.js');
     var users = require('../../app/controllers/users.server.controller');
 
     app.route('/characters')

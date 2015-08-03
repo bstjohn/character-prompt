@@ -103,18 +103,19 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 
 		// Find a list of Characters
 		$scope.find = function() {
-			//$scope.characters = Characters.query();
-            Characters.query(function loadedCharacters(characters) {
-                characters.forEach(appendBook);
-                $scope.characters = characters;
-            });
+			$scope.characters = Characters.query();
+            //Characters.query(function loadedCharacters(characters) {
+            //    characters.forEach(appendBook);
+            //    $scope.characters = characters;
+            //});
 		};
 
 		// Find existing Character
 		$scope.findOne = function() {
+            console.log('finding character..');
 			$scope.character = Characters.get({
 				characterId: $stateParams.characterId
-			}, appendBook);
+			});
 		};
 
 		// Search for a character

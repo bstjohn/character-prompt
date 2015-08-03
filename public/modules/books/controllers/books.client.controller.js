@@ -70,6 +70,7 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 
 		// Find existing Book
 		$scope.findOne = function() {
+            console.log('finding book..');
 			$scope.book = Books.get({
 				bookId: $stateParams.bookId
 			});
