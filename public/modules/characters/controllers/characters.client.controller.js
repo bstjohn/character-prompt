@@ -32,6 +32,7 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 		$scope.currentPage = 1;
 		$scope.pageSize = 10;
 		$scope.offset = 0;
+		$scope.maxBioLength = 2000;
 
 		// Page changed handler
 		$scope.pageChanged = function() {

@@ -30,7 +30,7 @@ function validateDescriptionLength (v) {
  * @returns {boolean}   True if validation was successful (length is accepted)
  */
 function validateBioLength (v) {
-	return v.length <= 140;
+	return v.length <= 2000;
 }
 
 /**
@@ -75,7 +75,6 @@ var CharacterSchema = new Schema({
         lowercase: true,
 		trim: true,
 		unique: false,
-		required: 'Last name cannot be blank',
 		validate: [validateLength, 'last name must be 30 characters or less']
 	},
     fullName: {
@@ -88,7 +87,6 @@ var CharacterSchema = new Schema({
 	description: {
 		type: String,
 		default: '',
-        lowercase: true,
 		trim: true,
 		unique: false,
 		required: 'Description cannot be blank',
@@ -97,10 +95,9 @@ var CharacterSchema = new Schema({
 	bio: {
 		type: String,
 		default: '',
-        lowercase: true,
 		trim: true,
 		unique: false,
-		validate: [validateBioLength, 'Bio must be 1000 characters or less.']
+		validate: [validateBioLength, 'Bio must be 2000 characters or less.']
 	}
 });
 

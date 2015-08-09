@@ -8,7 +8,7 @@
         <div class="">
             <h1 data-ng-bind="book.title | properCase"></h1>
             <h4 data-ng-bind="book.author | properCase"></h4>
-            <p data-ng-bind="book.releaseDate"></p>
+            <p data-ng-bind="book.releaseDate | date:'MM/dd/yyyy'"></p>
             <p data-ng-bind="book.description"></p>
 
             <div class="">

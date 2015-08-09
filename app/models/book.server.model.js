@@ -53,7 +53,6 @@ var BookSchema = new Schema({
     description: {
         type: String,
         default: '',
-        lowercase: true,
         trim: true,
         unique: false,
         required: 'description cannot be blank',
