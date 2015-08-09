@@ -42,6 +42,7 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 		$scope.create = function() {
 			var character = new Characters ({
                 book: this.book,
+                introChapter: this.introChapter,
                 title: this.title,
                 firstName: this.firstName,
                 middleName: this.middleName,
@@ -51,13 +52,12 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
                 bio: this.bio
             });
 
-            console.log(character.fullName);
-
             character.$save(function(response) {
                $location.path('characters/ + response.id');
 
                 // Clear form fields
                 $scope.book = '';
+                $scope.introChapter = 1;
                 $scope.title = '';
                 $scope.firstName = '';
                 $scope.middleName = '';
@@ -112,7 +112,6 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 
 		// Find existing Character
 		$scope.findOne = function() {
-            console.log('finding character..');
 			$scope.character = Characters.get({
 				characterId: $stateParams.characterId
             }, appendBook);

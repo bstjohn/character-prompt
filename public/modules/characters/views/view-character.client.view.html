@@ -1,12 +1,12 @@
 <section data-ng-controller="CharactersController" data-ng-init="findOne()">
     <div class="page-header">
-        <h1 data-ng-bind="character.fullName | capitalize:true"></h1>
+        <h1 data-ng-bind="character.fullName | properCase"></h1>
         <span class="h4">Book:</span>
         <a class="h4" href="#!/books/{{character.book._id}}">
-            {{character.book.title | capitalize:true}}
+            {{character.book.title | properCase}}
         </a>
-        <p data-ng-bind="character.description | capitalize"></p>
-        <p data-ng-bind="character.bio | capitalize"></p>
+        <p data-ng-bind="character.description"></p>
+        <p data-ng-bind="character.bio"></p>
     </div>
     <div class="pull-right">
         <a class="btn btn-primary" href="/#!/characters/{{character._id}}/edit">

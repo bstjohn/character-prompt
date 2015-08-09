@@ -25,6 +25,15 @@ function validateDescriptionLength (v) {
 }
 
 /**
+ * Ensure the length of the input is not too long.
+ * @param v     The input.
+ * @returns {boolean}   True if validation was successful (length is accepted)
+ */
+function validateBioLength (v) {
+	return v.length <= 140;
+}
+
+/**
  * Character Schema
  */
 var CharacterSchema = new Schema({
@@ -36,6 +45,12 @@ var CharacterSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Book',
         required: 'The specified book does not exist'
+    },
+    introChapter: {
+    	type: Number,
+    	default: 1,
+    	unique: false,
+    	required: 'Chapter of introduction cannot be blank'
     },
 	firstName: {
 		type: String,
@@ -84,7 +99,8 @@ var CharacterSchema = new Schema({
 		default: '',
         lowercase: true,
 		trim: true,
-		unique: false
+		unique: false,
+		validate: [validateBioLength, 'Bio must be 1000 characters or less.']
 	}
 });
 

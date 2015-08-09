@@ -21,7 +21,7 @@ function validateLength (v) {
  * @returns {boolean}   True if validation was successful (length is accepted)
  */
 function validateDescriptionLength (v) {
-    return v.length <= 140;
+    return v.length <= 1000;
 }
 
 /**

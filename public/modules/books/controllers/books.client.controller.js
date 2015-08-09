@@ -7,6 +7,7 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		$scope.currentPage = 1;
 		$scope.pageSize = 10;
 		$scope.offset = 0;
+		$scope.descLimit = 50;
 
 		// Page changed handler
 		$scope.pageChanged = function() {
