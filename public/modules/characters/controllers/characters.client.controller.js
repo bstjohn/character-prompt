@@ -53,6 +53,8 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
             });
 
             character.$save(function(response) {
+            	console.log('Saving character');
+            	console.log(response);
                $location.path('characters/ + response.id');
 
                 // Clear form fields
@@ -104,6 +106,7 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 		// Find a list of Characters
 		$scope.find = function() {
 			//$scope.characters = Characters.query();
+			console.log('finding list of characters');
             Characters.query(function loadedCharacters(characters) {
                 characters.forEach(appendBook);
                 $scope.characters = characters;
@@ -112,6 +115,7 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 
 		// Find existing Character
 		$scope.findOne = function() {
+			console.log('finding existing character');
 			$scope.character = Characters.get({
 				characterId: $stateParams.characterId
             }, appendBook);
