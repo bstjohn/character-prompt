@@ -1,5 +1,7 @@
 ## License
 Copyright &copy; Brady St. John <br />
+Character-Prompt includes code from MeanJS (meanjs.org) which is
+licensed under the MIT license.
 
 (The MIT License)
 
