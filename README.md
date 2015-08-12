@@ -1,5 +1,5 @@
 # Character Prompt
-Copyright &copy; Brady St. John <br />
+Copyright &copy; 2015 Brady St. John <br />
 This program is released under The MIT License (MIT).
 Please see the file COPYING in this distribution for
 license terms.
