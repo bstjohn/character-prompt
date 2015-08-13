@@ -9,7 +9,7 @@ Essentially, you will need:
 - Node.js & npm
 	- See the [Node.js download page](https://nodejs.org/download/) for more info.
 - MongoDB
-	- Installation files and instructions for MongoDB can be found on the [MongoDB home page](mongodb.org).
+	- Installation files and instructions for MongoDB can be found on the [MongoDB home page](https://www.mongodb.org/downloads).
 - bower
 ```sh
 $ npm install -g bower
