@@ -26,12 +26,18 @@ $ npm install -g grunt-cli
 ```sh
 $ mongod
 ```
-##### 3. Clone the project and deploy it.
+##### 3. Install angular-smart-table
+
+```sh
+$ bower install angular-smart-table
+```
+##### 4. Clone the project and deploy it.
 
 ```sh
 $ git clone [git-repo-url] character-prompt
 $ cd character-prompt
+$ npm install
 $ npm start
 ```
-##### 4. Start the project in the browser by navigating to http://localhost:3000/#!/.
-##### 5. Sign up and start tracking characters!
+##### 5. Start the project in the browser by navigating to [http://localhost:3000/#!/](http://localhost:3000/#!/).
+##### 6. Sign up and start tracking characters!

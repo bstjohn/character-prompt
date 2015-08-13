@@ -1,7 +1,8 @@
 ## License
 Copyright &copy; 2015 Brady St. John <br />
-Character-Prompt includes code from MeanJS (meanjs.org) which is
-licensed under the MIT license.
+Character-Prompt includes code from:
+	-MeanJS (meanjs.org) under MIT License
+	-Smart-Table (http://lorenzofox3.github.io/smart-table-website/) under MIT License
 
 (The MIT License)
 
