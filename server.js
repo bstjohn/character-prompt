@@ -1,3 +1,6 @@
+/**
+	This piece of code comes standard with MeanJS (http://meanjs.org/). 
+*/
 'use strict';
 /**
  * Module dependencies.
