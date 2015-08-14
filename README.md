@@ -5,8 +5,11 @@ Please see the file COPYING in this distribution for
 license terms.
 
 ####Description
-Ever forget who a character was in a long book or TV series? This web-application is meant to help you remember by providing character listings for books, movies, and TV. 
+Ever forget who a character was in a long book? This web-application is meant to help you remember by allowing you an easy way to keep track of characters as you read. Whenever you come across a new character, simply use the app to log their name, the chapter they're introduced in, a description of who they are, etc. Pages later, when you have forgotten the details of that character, you can use the app to search that character by name and pull up their info!
 
-This web-application will be created using AngularJS, NodeJS, JavaScript, and (likely) MongoDB. The first feature I wish to implement is the ability to add a book/movie/TV-show and update its list of characters. Each character will have a category for their name, first appearance, last appearance, etc. In the future, I would like to add users and some sort of web-like display showing character relations.
+
+This web-application was created using the MEAN stack (MongoDB, ExpressJS, AngularJS, and MongoDB). So far, a user is able to create an account, create books, and create characters for those books. Books and characters contian the sort of information you would expect: title/name, description, etc. A user can also edit or delete those books/characters. Nifty little features like search boxes have also been implemented.
+
+I'd like to carry this as far as I can! In the future, I'd really like to improve the UI, add a "Series" model for books in a series, and make the experience more user friendly. 
 
 Read the BUILDINSTRUCTIONS.md file to get started.

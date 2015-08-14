@@ -4,8 +4,8 @@ This program is released under The MIT License (MIT).
 Please see the file COPYING in this distribution for
 license terms.
 
-##### 1. Download and install necessary components of MeanJS by following the instructions in the [docs](http://meanjs.org/docs.html).
-Essentially, you will need:
+##### 1. Download and install necessary components of MeanJS. Follow the instructions below. If you get stuck, see the official [docs](http://meanjs.org/docs.html).
+You will need:
 - Node.js & npm
 	- See the [Node.js download page](https://nodejs.org/download/) for more info.
 - MongoDB
