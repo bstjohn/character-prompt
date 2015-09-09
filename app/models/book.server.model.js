@@ -45,7 +45,7 @@ var BookSchema = new Schema({
         trim: true,
         unique: true,
         required: 'title cannot be blank',
-        validate: [validateLength, 'title must be 30 characters or less']
+        validate: [validateLength, 'Title must be 30 characters or less']
     },
     author: {
         type: String,
@@ -54,7 +54,7 @@ var BookSchema = new Schema({
         trim: true,
         unique: false,
         required: 'author cannot be blank',
-        validate: [validateLength, 'author cannot have a name longer than 40 characters']
+        validate: [validateLength, 'Author cannot have a name longer than 40 characters']
     },
     description: {
         type: String,
@@ -62,7 +62,14 @@ var BookSchema = new Schema({
         trim: true,
         unique: false,
         required: 'description cannot be blank',
-        validate: [validateDescriptionLength, 'description must be 140 characters or less']
+        validate: [validateDescriptionLength, 'Description must be 1000 characters or less']
+    },
+    descriptionTwo: {
+        type: String,
+        default: '',
+        trim: true,
+        unique: false,
+        validate: [validateDescriptionLength, 'Second part of description must be 1000 characters or less']
     },
     releaseDate: {
         type: Date,
