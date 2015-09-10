@@ -25,7 +25,7 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		$scope.updateDesc = function($event) {
 			$scope.findOne();
 			$scope.book.$promise.then(function (book) {
-				$scope.currentDesc = book.description;
+				$scope.currentDesc = book.description + book.descriptionTwo;
 				$scope.updateDescLength();
 			});
 		};
