@@ -13,17 +13,20 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		$scope.currentPage = 1;
 		$scope.pageSize = 10;
 		$scope.offset = 0;
-		$scope.descMaxLength = 2000;
 
+		// Description variables
+		$scope.descMaxLength = 2000;
 		$scope.charactersRemaining = 2000;
 		$scope.currDescLength = 0;
 		$scope.currentDesc = '';
+
+		// Update the current description length
 		$scope.updateDescLength = function($event) {
 			$scope.charactersRemaining = $scope.descMaxLength - $scope.currentDesc.length;
 		};
 
+		// Update the displayed description
 		$scope.updateDesc = function($event) {
-			$scope.findOne();
 			$scope.book.$promise.then(function (book) {
 				$scope.currentDesc = book.description + book.descriptionTwo;
 				$scope.updateDescLength();
