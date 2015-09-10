@@ -36,8 +36,8 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		};
 
 		// Split the description into two parts if it's too long for Mongoose
-		$scope.splitDescription = function(desc, descTwo) {
-			var description = createDescObject(desc, descTwo);
+		$scope.splitDescription = function(desc) {
+			var description = createDescObject(desc);
 			var maxMongooseStrLength = 1000;
 			if (description.desc.length > maxMongooseStrLength) {
 				description.descTwo = description.desc.substring(maxMongooseStrLength, description.desc.length);
@@ -48,17 +48,17 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		};
 
 		// Create description object
-		var createDescObject = function (desc, descTwo) {
+		var createDescObject = function (desc) {
 			return {
 				desc: desc,
-				descTwo: descTwo
+				descTwo: ''
 			};
 		};
 
 		// Create new Book
 		$scope.create = function() {
 			// Split description up in case it's too long
-			var description = this.splitDescription($scope.currentDesc, this.descriptionTwo);
+			var description = this.splitDescription($scope.currentDesc);
 			this.description = description.desc;
 			this.descriptionTwo = description.descTwo;
 
@@ -108,7 +108,7 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		$scope.update = function() {
 			var book = $scope.book;
 
-			var description = this.splitDescription($scope.currentDesc, book.descriptionTwo);
+			var description = this.splitDescription($scope.currentDesc);
 			book.description = description.desc;
 			book.descriptionTwo = description.descTwo; 
 
