@@ -32,7 +32,11 @@
                 <div class="form-group">
                     <label class="control-label" for="description">Description</label>
                     <div class="controls">
-                        <textarea name="description" data-ng-model="book.description" id="description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
+                        <!-- <textarea name="description" maxlength="{{descMaxLength}}" data-ng-model="book.description" data-ng-init="updateDesc()" ng-change="updateDescLength()" id="description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea> -->
+                        <textarea name="description" maxlength="{{descMaxLength}}" ng-model="currentDesc" data-ng-init="updateDesc()" ng-change="updateDescLength()" id="description" class="form-control" cols="30" rows="10" placeholder="Description">{{book.description}}</textarea>
+                        <p ng-model="charactersRemaining">
+                            <font style="color:blue"><strong>{{charactersRemaining}}</strong></font> characters remaining.
+                        </p>
                     </div>
                 </div>
                 <div class="form-group">

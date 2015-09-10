@@ -17,8 +17,17 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 
 		$scope.charactersRemaining = 2000;
 		$scope.currDescLength = 0;
+		$scope.currentDesc = '';
 		$scope.updateDescLength = function($event) {
-			$scope.charactersRemaining = $scope.descMaxLength - this.description.length;
+			$scope.charactersRemaining = $scope.descMaxLength - $scope.currentDesc.length;
+		};
+
+		$scope.updateDesc = function($event) {
+			$scope.findOne();
+			$scope.book.$promise.then(function (book) {
+				$scope.currentDesc = book.description;
+				$scope.updateDescLength();
+			});
 		};
 
 		// Page changed handler
@@ -49,7 +58,7 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		// Create new Book
 		$scope.create = function() {
 			// Split description up in case it's too long
-			var description = this.splitDescription(this.description, this.descriptionTwo);
+			var description = this.splitDescription($scope.currentDesc, this.descriptionTwo);
 			this.description = description.desc;
 			this.descriptionTwo = description.descTwo;
 
@@ -99,7 +108,7 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		$scope.update = function() {
 			var book = $scope.book;
 
-			var description = this.splitDescription(book.description, book.descriptionTwo);
+			var description = this.splitDescription($scope.currentDesc, book.descriptionTwo);
 			book.description = description.desc;
 			book.descriptionTwo = description.descTwo; 
 
