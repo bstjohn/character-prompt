@@ -36,9 +36,38 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 		$scope.authentication = Authentication;
         $scope.books = Books.query();
 		$scope.currentPage = 1;
-		$scope.pageSize = 10;
 		$scope.offset = 0;
-		$scope.maxBioLength = 2000;
+		$scope.pageSize = 10;
+
+		// Character description variables
+		$scope.currentDesc = '';
+		$scope.descCharsRemaining = 140;
+		$scope.maxDescLength = 140;
+
+		// Character bio variables
+		$scope.currentBio = '';
+		$scope.bioCharsRemaining = 1000;
+		$scope.maxBioLength = 1000;
+
+		// Update the current length of a text input
+		$scope.updateInputLength = function(input) {
+			if (angular.equals(input, $scope.currentDesc)) {
+				if (angular.isUndefined($scope.currentDesc)) {
+					$scope.currentDesc = '';
+				}
+				$scope.descCharsRemaining = $scope.maxDescLength - $scope.currentDesc.length;
+			} else if (angular.equals(input, $scope.currentBio)) {
+				$scope.bioCharsRemaining = $scope.maxBioLength - $scope.currentBio.length;
+			}
+		};
+
+		// Update the displayed description
+		$scope.updateDesc = function() {
+			// $scope.book.$promise.then(function (book) {
+			// 	$scope.currentDesc = book.description + book.descriptionTwo;
+			// 	$scope.updateDescLength();
+			// });
+		};
 
 		// Page changed handler
 		$scope.pageChanged = function() {
@@ -55,8 +84,8 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
                 middleName: this.middleName,
                 lastName: this.lastName,
                 fullName: getFullName(this.firstName, this.middleName, this.lastName),
-                description: this.description,
-                bio: this.bio
+                description: $scope.currentDesc,
+                bio: $scope.currentBio
             });
 
             character.$save(function(response) {

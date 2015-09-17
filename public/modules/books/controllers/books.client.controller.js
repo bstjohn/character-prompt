@@ -14,15 +14,19 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		$scope.pageSize = 10;
 		$scope.offset = 0;
 
+		// Character description display limit
+		$scope.descLimit = 60;
+
 		// Description variables
-		$scope.descMaxLength = 2000;
+		$scope.showFullDesc = false;
+		$scope.maxDisplayDescLength = 500;
+		$scope.maxDescLength = 2000;
 		$scope.charactersRemaining = 2000;
-		$scope.currDescLength = 0;
 		$scope.currentDesc = '';
 
 		// Update the current description length
 		$scope.updateDescLength = function($event) {
-			$scope.charactersRemaining = $scope.descMaxLength - $scope.currentDesc.length;
+			$scope.charactersRemaining = $scope.maxDescLength - $scope.currentDesc.length;
 		};
 
 		// Update the displayed description
@@ -56,6 +60,11 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 				desc: desc,
 				descTwo: ''
 			};
+		};
+
+		// Toggle the state of the description
+		$scope.toggleFullDesc = function() {
+			this.showFullDesc = !this.showFullDesc;
 		};
 
 		// Create new Book

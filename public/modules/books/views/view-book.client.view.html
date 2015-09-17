@@ -16,12 +16,21 @@
             <h4 data-ng-bind="book.author | properCase"></h4>
             <p data-ng-bind="book.releaseDate | date:'MM/dd/yyyy'"></p>
             <div style="word-wrap:break-word; margin-bottom: 25px">
-                <span ng-show="currentDesc.length > 500">
-                    <p ng-bind="currentDesc | limitTo : 500" data-ng-init="updateDesc()">{{currentDesc | limitTo : 1000}}</p>
-                    <a class="pull-right" ng-click="">
-                        <strong>More</strong><i class="glyphicon glyphicon-chevron-right"></i>
+                <div ng-show="!showFullDesc">
+                    <span style="" ng-bind="currentDesc | limitTo : maxDisplayDescLength" data-ng-init="updateDesc()"></span>
+                    <span ng-show="currentDesc.length > maxDisplayDescLength">[...]</span>
+                    <div ng-show="currentDesc.length > maxDisplayDescLength">
+                        <a class="pull-right" ng-click="toggleFullDesc()">
+                            <i class="glyphicon glyphicon-chevron-right"></i><strong>More</strong>
+                        </a>
+                    </div>
+                </div>
+                <div ng-show="showFullDesc">
+                    <p ng-bind="currentDesc" data-ng-init="updateDesc()"></p>
+                    <a class="pull-right" ng-click="toggleFullDesc()">
+                        <i class="glyphicon glyphicon-chevron-left"></i><strong>Less</strong>
                     </a>
-                </span>
+                </div>
             </div>
 
             <div class="">
@@ -68,12 +77,8 @@
                 <!-- <td>{{character.middleName | properCase}}</td> -->
                 <td>{{character.lastName | properCase}}</td>
                 <td>
-                    <span>{{character.description | limitTo : descLimit}}</span>
-                    <span class="" ng-show="character.description.length > descLimit">
-                        ...
-                    </span>
-                </td>
-                <td>
+                    <span>{{character.description | limitTo : descLimit}}</span><span class="" ng-show="character.description.length > descLimit">...</span>
+                </td>                <td>
                     <a class="btn" href="/#!/characters/{{character._id}}">
                         <i class="glyphicon glyphicon-eye-open"></i>
                     </a>

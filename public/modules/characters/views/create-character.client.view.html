@@ -37,12 +37,21 @@
                 <div class="form-group">
                     <label class="control-label" for="description">Description</label>
                     <div class="controls">
-                        <input type="text" minlength="1" maxlength="140" data-ng-model="description" id="description" class="form-control"
-                               placeholder="A short (140 character or less) description of the character." required>
+                        <input type="text" minlength="1" maxlength="maxDescLength" ng-model="currentDesc" ng-change="updateInputLength(currentDesc)" id="description" class="form-control"
+                               placeholder="A short description of the character." required>
+
+                        <p ng-model="descCharsRemaining">
+                            <font style="color:blue"><strong>{{descCharsRemaining}}</strong></font> characters remaining.
+                        </p>
                     </div>
-                    <label class="control-label" for="bio">Character Bio</label>
+                    <label class="control-label" for="bio">Character Bio (Not required)</label>
                     <div class="controls">
-                        <textarea type="text" maxlength="maxBioLength" cols="30" rows="10" data-ng-model="bio" id="bio" class="form-control" placeholder=""></textarea>
+                        <textarea type="text" maxlength="maxBioLength" cols="30" rows="10" ng-model="currentBio" ng-change="updateInputLength(currentBio)" id="bio" class="form-control" 
+                        placeholder="The character's biography."></textarea>
+
+                        <p ng-model="bioCharsRemaining">
+                            <font style="color:blue"><strong>{{bioCharsRemaining}}</strong></font> characters remaining.
+                        </p>
                     </div>
                 </div>
                 <div class="form-group">
