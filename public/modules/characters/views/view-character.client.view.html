@@ -11,7 +11,8 @@
         <a class="h4" href="#!/books/{{character.book._id}}">
             {{character.book.title | properCase}}
         </a>
-        <p data-ng-bind="character.description"></p>
+        <p> First introduced in chapter {{character.introChapter}}.</p>
+        <p>{{character.description}}</p>
         <p data-ng-bind="character.bio"></p>
     </div>
     <div class="pull-right">

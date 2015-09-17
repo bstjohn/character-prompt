@@ -61,12 +61,11 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 			}
 		};
 
-		// Update the displayed description
-		$scope.updateDesc = function() {
-			// $scope.book.$promise.then(function (book) {
-			// 	$scope.currentDesc = book.description + book.descriptionTwo;
-			// 	$scope.updateDescLength();
-			// });
+		// Update the book
+		$scope.updateBook = function() {
+			$scope.character.$promise.then(function (character) {
+				$scope.currentBook = character.book;
+			});
 		};
 
 		// Page changed handler
@@ -124,6 +123,8 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 		// Update existing Character
 		$scope.update = function() {
 			var character = $scope.character;
+			
+			character.book = $scope.currentBook._id;
 
 			character.$update(function() {
 				$location.path('characters/' + character._id);
