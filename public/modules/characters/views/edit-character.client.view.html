@@ -7,7 +7,7 @@
 <section data-ng-controller="CharactersController" data-ng-init="findOne()">
     <div class="page-header">
         <h1>Edit Character</h1>
-        <h4 ng-init="updateBook()">{{currentBook.title | properCase}}</h4>
+        <h4 ng-init="updateCharacterData()">{{currentBook.title | properCase}}</h4>
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
@@ -32,12 +32,21 @@
                 <div class="form-group">
                     <label class="control-label" for="description">Description</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="character.description" id="description" class="form-control"
+                        <input type="text" ng-model="currentDesc" data-ng-init="updateCharacterData()" ng-change="updateInputLength(currentDesc)" id="description" class="form-control"
                                placeholder="A short (140 character or less) description of the character." required>
+
+                        <p ng-model="descCharsRemaining">
+                            <font style="color:blue"><strong>{{descCharsRemaining}}</strong></font> characters remaining.
+                        </p>
                     </div>
                     <label class="control-label" for="bio">Character Bio</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="character.bio" id="bio" class="form-control" placeholder="">
+                        <input type="text" ng-model="currentBio" data-ng-init="updateCharacterData()" ng-change="updateInputLength(currentBio)" id="bio" class="form-control"
+                                placeholder="The character's biography.">
+
+                        <p ng-model="bioCharsRemaining">
+                            <font style="color:blue"><strong>{{bioCharsRemaining}}</strong></font> characters remaining.
+                        </p>
                     </div>
                 </div>
                 <div class="form-group">

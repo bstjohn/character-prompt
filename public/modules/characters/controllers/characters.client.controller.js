@@ -61,10 +61,16 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 			}
 		};
 
-		// Update the book
-		$scope.updateBook = function() {
+		// Update the book data
+		$scope.updateCharacterData = function() {
 			$scope.character.$promise.then(function (character) {
 				$scope.currentBook = character.book;
+
+				$scope.currentBio = character.bio;
+				$scope.updateInputLength($scope.currentBio);
+
+				$scope.currentDesc = character.description;
+				$scope.updateInputLength($scope.currentDesc);
 			});
 		};
 
@@ -125,6 +131,8 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 			var character = $scope.character;
 			
 			character.book = $scope.currentBook._id;
+			character.description = $scope.currentDesc;
+			character.bio = $scope.currentBio;
 
 			character.$update(function() {
 				$location.path('characters/' + character._id);
