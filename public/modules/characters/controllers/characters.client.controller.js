@@ -39,6 +39,12 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 		$scope.offset = 0;
 		$scope.pageSize = 10;
 
+		// // Modal variables and functions
+		// $scope.showModal = false;
+		// $scope.toggleModal = function() {
+		// 	$scope.showModal = !$scope.showModal;
+		// };
+
 		// Character description variables
 		$scope.currentDesc = '';
 		$scope.descCharsRemaining = 140;
