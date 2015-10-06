@@ -7,8 +7,8 @@
 'use strict';
 
 // Books controller
-angular.module('books').controller('BooksController', ['$scope', '$stateParams', '$location', 'Authentication', 'Books', 'Characters', '$filter',
-	function($scope, $stateParams, $location, Authentication, Books, Characters, $filter) {
+angular.module('books').controller('BooksController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users', 'Books', 'Characters', '$filter',
+	function ($scope, $stateParams, $location, Authentication, Users, Books, Characters, $filter) {
 		$scope.authentication = Authentication;
 		$scope.currentPage = 1;
 		$scope.pageSize = 10;
@@ -25,12 +25,12 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		$scope.currentDesc = '';
 
 		// Update the current description length
-		$scope.updateDescLength = function($event) {
+		$scope.updateDescLength = function ($event) {
 			$scope.charactersRemaining = $scope.maxDescLength - $scope.currentDesc.length;
 		};
 
 		// Update the displayed description
-		$scope.updateDesc = function($event) {
+		$scope.updateDesc = function ($event) {
 			$scope.book.$promise.then(function (book) {
 				$scope.currentDesc = book.description + book.descriptionTwo;
 				$scope.updateDescLength();
@@ -38,12 +38,12 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		};
 
 		// Page changed handler
-		$scope.pageChanged = function() {
+		$scope.pageChanged = function () {
 			$scope.offset = ($scope.currentPage - 1) * $scope.pageSize;
 		};
 
 		// Split the description into two parts if it's too long for Mongoose
-		$scope.splitDescription = function(desc) {
+		$scope.splitDescription = function (desc) {
 			var description = createDescObject(desc);
 			var maxMongooseStrLength = 1000;
 			if (description.desc.length > maxMongooseStrLength) {
@@ -63,12 +63,12 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		};
 
 		// Toggle the state of the description
-		$scope.toggleFullDesc = function() {
+		$scope.toggleFullDesc = function () {
 			this.showFullDesc = !this.showFullDesc;
 		};
 
 		// Create new Book
-		$scope.create = function() {
+		$scope.create = function () {
 			// Split description up in case it's too long
 			var description = this.splitDescription($scope.currentDesc);
 			this.description = description.desc;
@@ -76,31 +76,29 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 
 			// Create new Book object
 			var book = new Books ({
+				user: $scope.authentication.user._id,
+				shared: this.shared,
 				title: this.title,
                 author: this.author,
 				description: this.description,
 				descriptionTwo: this.descriptionTwo
 			});
 
-			console.log(this.description);
-			console.log(this.descriptionTwo);
-
 			// Redirect after save
-			book.$save(function(response) {
+			book.$save(function (response) {
 				$location.path('books/' + response._id);
 
 				// Clear form fields
 				$scope.title = '';
                 $scope.author = '';
                 $scope.description = '';
-			}, function(errorResponse) {
+			}, function (errorResponse) {
 				$scope.error = errorResponse.data.message;
-				console.log(errorResponse);
 			});
 		};
 
 		// Remove existing Book
-		$scope.remove = function(book) {
+		$scope.remove = function (book) {
 			if (book) {
 				book.$remove();
 
@@ -110,48 +108,87 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 					}
 				}
 			} else {
-				$scope.book.$remove(function() {
+				$scope.book.$remove(function () {
 					$location.path('books');
 				});
 			}
 		};
 
 		// Update existing Book
-		$scope.update = function() {
+		$scope.update = function () {
 			var book = $scope.book;
 
 			var description = this.splitDescription($scope.currentDesc);
 			book.description = description.desc;
 			book.descriptionTwo = description.descTwo; 
 
-			book.$update(function() {
+			book.$update(function () {
 				$location.path('books/' + book._id);
-			}, function(errorResponse) {
+			}, function (errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
 
+		// Set the show add to book shelf variable
+		$scope.getShelfStatus = function () {
+			$scope.showAddToShelf = angular.equals($scope.authentication.user.bookShelf.indexOf($scope.book._id), -1);
+			
+			console.log($scope.showAddToShelf);
+		};
+
+		// Toggle whether the books should appear in the user's shelf
+		$scope.toggleAddToShelf = function () {
+			var user = $scope.authentication.user;
+			var bookId = $scope.book._id;
+
+			var index = user.bookShelf.indexOf(bookId);
+			console.log(user.bookShelf);
+			if (!angular.equals(index, -1)) {
+				$scope.showAddToShelf = true;
+				user.bookShelf.splice(index, 1);
+				$scope.updateUser();
+				console.log('splicing');
+				return;
+			}
+			
+			$scope.showAddToShelf = false;
+			user.bookShelf.push($scope.book._id);
+			$scope.updateUser();
+			console.log('pushing');
+		};
+
+		// Update the current user
+		$scope.updateUser = function () {
+			var user = Users.update($scope.user);
+
+			user.$update(function() {
+				
+			}, function(response) {
+				$scope.error = response.data.message;
+			});
+		};
+
 		// Find a list of Books
-		$scope.find = function() {
+		$scope.find = function () {
 			$scope.books = Books.query();
 		};
 
 		// Find existing Book
-		$scope.findOne = function() {
+		$scope.findOne = function () {
 			$scope.book = Books.get({
 				bookId: $stateParams.bookId
 			});
 		};
 
 		// Search for a book
-		$scope.bookSearch = function(book) {
+		$scope.bookSearch = function (book) {
 			$location.path('books/' + book._id);
 		};
 
         /**
          * Define data that will be used in a table.
          */
-        $scope.initTable = function() {
+        $scope.initTable = function () {
             $scope.currentBook = $stateParams.bookId;
             $scope.characterCollection = Characters.querySome();
             $scope.characterCollection = Characters.query(function loadCharacters(characters) {

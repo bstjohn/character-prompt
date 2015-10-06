@@ -28,6 +28,13 @@ var validateLocalStrategyPassword = function(password) {
 };
 
 /**
+* A validation function for favorited books
+*/
+var validateFavoritedBooks = function(bookId) {
+	return (this.bookShelf.indexOf(bookId) !== -1);
+};
+
+/**
  * User Schema
  */
 var UserSchema = new Schema({
@@ -94,7 +101,12 @@ var UserSchema = new Schema({
 	},
 	resetPasswordExpires: {
 		type: Date
-	}
+	},
+	bookShelf: [{
+		type: mongoose.Schema.Types.ObjectId,
+        ref: 'book',
+        validate: [validateFavoritedBooks, 'Book already favorited']
+	}]
 });
 
 /**

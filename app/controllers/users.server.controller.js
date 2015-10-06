@@ -9,8 +9,10 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash');
-
+var mongoose = require('mongoose'),
+    errorHandler = require('./errors.server.controller'),
+    Character = mongoose.model('User'),
+    _ = require('lodash');
 /**
  * Extend user's controller
  */

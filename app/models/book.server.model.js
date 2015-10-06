@@ -38,12 +38,20 @@ var BookSchema = new Schema({
 		type: Date,
         default: Date.now
 	},
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    shared: {
+        type: Boolean,
+        default: false
+    },
     title: {
         type: String,
         default: '',
         lowercase: true,
         trim: true,
-        unique: true,
+        unique: false,
         required: 'title cannot be blank',
         validate: [validateLength, 'Title must be 30 characters or less']
     },

@@ -31,7 +31,7 @@ var getFullName = function(first, middle, last) {
     return angular.lowercase(fullName);
 };
 
-angular.module('characters').controller('CharactersController', ['$scope', '$stateParams', '$location', '$filter', 'Authentication','Characters', 'Books',
+angular.module('characters').controller('CharactersController', ['$scope', '$stateParams', '$location', '$filter', 'Authentication', 'Characters', 'Books',
 	function($scope, $stateParams, $location, $filter, Authentication, Characters, Books) {
 		$scope.authentication = Authentication;
         $scope.books = Books.query();
@@ -112,6 +112,7 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
                 $scope.bio = '';
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
+                console.log(errorResponse);
             });
 		};
 
