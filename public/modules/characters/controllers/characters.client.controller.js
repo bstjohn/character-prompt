@@ -136,10 +136,11 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 		// Update existing Character
 		$scope.update = function() {
 			var character = $scope.character;
-			
+
 			character.book = $scope.currentBook._id;
-			character.description = $scope.currentDesc;
 			character.bio = $scope.currentBio;
+            character.description = $scope.currentDesc;
+            character.fullName = getFullName(character.firstName, character.middleName, character.lastName);
 
 			character.$update(function() {
 				$location.path('characters/' + character._id);
