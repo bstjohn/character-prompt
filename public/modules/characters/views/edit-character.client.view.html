@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <label class="control-label" for="description">Description</label>
                     <div class="controls">
-                        <input type="text" ng-model="currentDesc" data-ng-init="updateCharacterData()" ng-change="updateInputLength(currentDesc)" id="description" class="form-control"
+                        <input type="text" ng-model="currentDesc" data-ng-init="updateCharacterData()" maxlength={{maxDescLength}} ng-change="updateInputLength(currentDesc)" id="description" class="form-control"
                                placeholder="A short (140 character or less) description of the character." required>
 
                         <p ng-model="descCharsRemaining">
@@ -41,7 +41,7 @@
                     </div>
                     <label class="control-label" for="bio">Character Bio</label>
                     <div class="controls">
-                        <input type="text" ng-model="currentBio" data-ng-init="updateCharacterData()" ng-change="updateInputLength(currentBio)" id="bio" class="form-control"
+                        <input type="text" ng-model="currentBio" data-ng-init="updateCharacterData()" maxlength={{maxBioLength}} ng-change="updateInputLength(currentBio)" id="bio" class="form-control"
                                 placeholder="The character's biography.">
 
                         <p ng-model="bioCharsRemaining">
