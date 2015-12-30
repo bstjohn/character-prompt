@@ -7,8 +7,7 @@
 <section data-ng-controller="CharactersController" data-ng-init="findOne()">
     <div class="page-header">
         <h1 data-ng-bind="character.fullName | properCase"></h1>
-        <span class="h4">Book:</span>
-        <a class="h4" href="#!/books/{{character.book._id}}">
+        <a class="h4" style="color: blue; text-decoration: underline;" href="#!/books/{{character.book._id}}">
             {{character.book.title | properCase}}
         </a>
         <p> First introduced in chapter {{character.introChapter}}.</p>
