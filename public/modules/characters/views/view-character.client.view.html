@@ -7,18 +7,19 @@
 <section data-ng-controller="CharactersController" data-ng-init="findOne()">
     <div class="page-header">
         <h1 data-ng-bind="character.fullName | properCase"></h1>
-        <a class="h4" style="color: blue; text-decoration: underline;" href="#!/books/{{character.book._id}}">
+        <a class="h4 book-link" href="#!/books/{{character.book._id}}">
+            <i class="glyphicon glyphicon-book"></i>
             {{character.book.title | properCase}}
         </a>
-        <p> First introduced in chapter {{character.introChapter}}.</p>
-        <p>{{character.description}}</p>
-        <p data-ng-bind="character.bio"></p>
+        <div>Chapter {{character.introChapter}}</div>
+        <div>{{character.description}}</div>
+        <div class="editable-area" id="character-bio" title="Bio" ng-click="editArea($event)" data-ng-bind="character.bio"></div>
     </div>
     <div class="pull-right">
         <a class="btn btn-primary" href="/#!/characters/{{character._id}}/edit">
             <i class="glyphicon glyphicon-edit"></i>
         </a>
-        <a class="btn btn-primary" data-ng-click="remove();">
+        <a class="btn btn-primary" data-ng-click="remove()">
             <i class="glyphicon glyphicon-trash"></i>
         </a>
     </div>

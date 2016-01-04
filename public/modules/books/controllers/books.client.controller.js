@@ -97,21 +97,30 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 			});
 		};
 
+		$scope.validateDeletion = function () {
+			$scope.deleteBook = false;
+			$scope.$watch('validateDeleteInput', function(newInput) {
+				var title = angular.lowercase($scope.book.title);
+				var titleInput = angular.lowercase(newInput);
+				$scope.validateDeleteSuccess = angular.equals(title, titleInput);
+			});	
+		};
+		
 		// Remove existing Book
-		$scope.remove = function (book) {
-			if (book) {
-				book.$remove();
-
-				for (var i in $scope.books) {
-					if ($scope.books [i] === book) {
-						$scope.books.splice(i, 1);
-					}
-				}
-			} else {
-				$scope.book.$remove(function () {
-					$location.path('books');
-				});
+		$scope.remove = function () {
+			if (!angular.equals($scope.validateDeleteSuccess, true)) {
+				return;
 			}
+
+			angular.forEach($scope.bookCharacters, function (character, key) {
+				if(angular.equals($scope.book.title, character.book.title)) {
+					$scope.character.$remove();
+				}
+			});
+
+			$scope.book.$remove(function () {
+				$location.path('books');
+			});
 		};
 
 		// Update existing Book
@@ -210,6 +219,10 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
                 }
                 $scope.bookCharacters = characters;
             });
+        };
+
+        $scope.viewCharacter = function (characterId) {
+        	$location.path('characters/' + characterId);
         };
 	}
 ]);

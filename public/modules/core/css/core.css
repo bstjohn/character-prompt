@@ -4,11 +4,29 @@
 	Please see the file COPYING in this distribution for
 	license terms.
 */
+.book-link {
+    color: darkblue;
+}
+.book-link:hover {
+    text-decoration: none;
+}
 .content {
 	margin-top: 50px;
 }
+.clickable-row {
+    cursor: pointer;
+}
+.clickable-row:hover {
+    font-weight: bold;
+    border: 1px solid lightgrey;
+}
 .undecorated-link:hover {
 	text-decoration: none;
+}
+.new-character-button {
+    bottom: 15px;
+    position: relative;
+    top: 15px;
 }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 	display: none !important;
@@ -18,4 +36,33 @@
 }
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
+}
+.make-it-blue {
+    color: blue;
+    background-color: blue;
+    border: 5px solid blue;
+}
+.more-less {
+    cursor: pointer;
+}
+.more-less:hover {
+    text-decoration: none;
+}
+.invalid-input {
+    color: red;
+}
+.valid-input {
+    color: green;
+}
+.validation-box {
+    background: white;
+    border: 1px solid black;
+    display: inline-block;
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    position: absolute;
+    width: 225px;
+}
+.validate-deletion-input {
+    margin: 5px 5px 5px 0;
 }

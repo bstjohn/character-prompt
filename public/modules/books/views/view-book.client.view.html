@@ -13,16 +13,16 @@
     <div class="page-header">
         <div>
             <h1 data-ng-bind="book.title | properCase"></h1>
-            <div ng-show="book.user !== authentication.user._id" data-ng-init="getShelfStatus()">
-                <!-- <form data-ng-submit="updateUser()" novalidate>
+            <!-- <div ng-show="book.user !== authentication.user._id" data-ng-init="getShelfStatus()">
+                <form data-ng-submit="updateUser()" novalidate>
                     <button type="submit" ng-show="showAddToShelf" type="button" class="btn btn-success" ng-click="toggleAddToShelf()" title="Add to Book Shelf">
                         <span class="glyphicon glyphicon-plus"></span> <span class="glyphicon glyphicon-book"></span>
                     </button>
                     <button type="submit" ng-show="!showAddToShelf" type="button" class="btn btn-warning" ng-click="toggleAddToShelf()" title="Remove from Book Shelf">
                         <span class="glyphicon glyphicon-remove"></span> <span class="glyphicon glyphicon-book"></span>
                     </button>
-                </form> -->
-            </div>
+                </form>
+            </div> -->
             <h4 data-ng-bind="book.author | properCase"></h4>
             <p data-ng-bind="book.releaseDate | date:'MM/dd/yyyy'"></p>
             <div style="word-wrap:break-word; margin-bottom: 25px">
@@ -44,25 +44,29 @@
             </div>
 
             <div ng-show="book.user === authentication.user._id">
-                <a class="btn btn-primary" href="/#!/books/{{book._id}}/edit">
+                <a title="Edit book" class="btn btn-primary" href="/#!/books/{{book._id}}/edit">
                     <i class="glyphicon glyphicon-edit"></i>
                 </a>
-                <a class="btn btn-primary" data-ng-click="remove();">
+                <a ng-disable="!deleteBook" title="Delete book" class="btn btn-primary" data-ng-click="deleteBook = true">
                     <i class="glyphicon glyphicon-trash"></i>
                 </a>
+
+                <div ng-show="deleteBook" class="validation-box" ng-init="validateDeletion()">
+                    <label class="control-label" for="remove-book-validation">Please type the name of the book you wish to delete.</label>
+                    <div class="controls">
+                        <input id="remove-book-validation" class="validate-deletion-input" data-ng-model="validateDeleteInput">
+                            <div ng-hide="validateDeleteSuccess" class="glyphicon glyphicon-remove invalid-input"></div>
+                            <div ng-show="validateDeleteSuccess" class="glyphicon glyphicon-ok valid-input"></div>
+                        </input>
+                        <div class="btn-group">
+                            <button title="Cancel" class="btn btn-primary btn-sm" ng-click="deleteBook = false">Cancel</button>
+                            <button title="Delete book" class="btn btn-danger btn-sm" data-ng-click="remove()">Delete</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    
-    <!-- <section data-ng-controller="CharactersController">
-        <button type="button" class="btn btn-primary glyphicon glyphicon-plus" ng-click="toggleModal()">
-            New
-        </button>
-
-        <modal title="Create Character" visible="showModal">
-        </modal>
-    </section> -->
-
     <div>
         <h2 class="pull-left">
             Characters
@@ -91,17 +95,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="character in bookCharacters">
+            <tr class="clickable-row" ng-click="viewCharacter(character._id)" ng-repeat="character in bookCharacters">
                 <td>{{character.introChapter}}</td>
                 <td>{{character.firstName | properCase}}</td>
                 <!-- <td>{{character.middleName | properCase}}</td> -->
                 <td>{{character.lastName | properCase}}</td>
                 <td>
                     <span>{{character.description | limitTo : descLimit}}</span><span class="" ng-show="character.description.length > descLimit">...</span>
-                </td>                <td>
-                    <a class="btn" href="/#!/characters/{{character._id}}">
-                        <i class="glyphicon glyphicon-eye-open"></i>
-                    </a>
                 </td>
             </tr>
             </tbody>

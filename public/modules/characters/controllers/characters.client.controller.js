@@ -118,11 +118,11 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 
 		// Remove existing Character
 		$scope.remove = function(character) {
-			if ( character ) {
+			if (character) {
 				character.$remove();
 
 				for (var i in $scope.characters) {
-					if ($scope.characters [i] === character) {
+					if ($scope.characters[i] === character) {
 						$scope.characters.splice(i, 1);
 					}
 				}
@@ -173,5 +173,10 @@ angular.module('characters').controller('CharactersController', ['$scope', '$sta
 		$scope.characterSearch = function(character) {
 			$location.path('characters/' + character._id);
 		};
+
+        // Edit the clicked area
+        $scope.editArea = function($event) {
+            console.log($event.target.id);
+        };
 	}
 ]);
