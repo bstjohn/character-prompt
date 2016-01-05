@@ -101,7 +101,7 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 			$scope.deleteBook = false;
 			$scope.$watch('validateDeleteInput', function(newInput) {
 				var title = angular.lowercase($scope.book.title);
-				var titleInput = angular.lowercase(newInput);
+				var titleInput = newInput === undefined ? '' : angular.lowercase(newInput);
 				$scope.validateDeleteSuccess = angular.equals(title, titleInput);
 			});	
 		};
@@ -113,8 +113,8 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 			}
 
 			angular.forEach($scope.bookCharacters, function (character, key) {
-				if(angular.equals($scope.book.title, character.book.title)) {
-					$scope.character.$remove();
+				if(angular.equals($scope.book._id, character.book)) {
+					character.$remove();
 				}
 			});
 
